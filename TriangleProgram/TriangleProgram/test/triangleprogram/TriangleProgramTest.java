@@ -32,7 +32,7 @@ public class TriangleProgramTest {
     public void testPositiveNumber() {
         System.out.println("Testing for positive numbers");
         String str = "scalene triangle";
-        double[] arr = new double[3];
+        int[] arr = new int[3];
         arr[0] = 5;
         arr[1] = 4;
         arr[2] = 3;
@@ -45,7 +45,7 @@ public class TriangleProgramTest {
     public void testNegativeNumber() {
         System.out.println("Testing for negative number");
         String str = "!Invalid value please type a positive number";
-        double[] arr = new double[3];
+        int[] arr = new int[3];
         arr[0] = 5;
         arr[1] = -4;
         arr[2] = 3;
@@ -59,8 +59,8 @@ public class TriangleProgramTest {
         System.out.println("Testing for text input");
         String str = "!Invalid error detected. You got a ";
         String textString = "text";
-        double text = Double.parseDouble(textString);
-        double[] arr = new double[3];
+        int text = Integer.parseInt(textString);
+        int[] arr = new int[3];
         arr[0] = text;
         arr[1] = 3;
         arr[2] = 5;
@@ -72,9 +72,9 @@ public class TriangleProgramTest {
     public void getScaleneTriangle() {
         System.out.println("Testing for Scalene triangle output");
         String str = "scalene triangle";
-        double[] arr = new double[3];
-        arr[0] = 6.3;
-        arr[1] = 5.5;
+        int[] arr = new int[3];
+        arr[0] = 6;
+        arr[1] = 5;
         arr[2] = 3;
         tp.setArr(arr);
         tp.calcTriangle();
@@ -85,7 +85,7 @@ public class TriangleProgramTest {
     public void getEquilateralTriangle() {
         System.out.println("Testing for equilateral triangle output");
         String str = "equilateral triangle";
-        double[] arr = new double[3];
+        int[] arr = new int[3];
         arr[0] = 3;
         arr[1] = 3;
         arr[2] = 3;
@@ -98,7 +98,7 @@ public class TriangleProgramTest {
     public void getIsoscelesTriangle() {
         System.out.println("Testing for isosceles triangle output");
         String str = "isosceles triangle";
-        double[] arr = new double[3];
+        int[] arr = new int[3];
         arr[0] = 5;
         arr[1] = 5;
         arr[2] = 3;
