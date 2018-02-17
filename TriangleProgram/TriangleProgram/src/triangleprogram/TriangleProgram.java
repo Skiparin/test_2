@@ -15,11 +15,59 @@ import java.util.logging.SimpleFormatter;
 
 /**
  *
- * @author Ørvur
+ * @author micha
  */
 public class TriangleProgram {
 
-    private int[] arr;
+    /**
+     * 
+     * @return 
+     */
+    public double[] getArr() {
+        return arr;
+    }
+    
+    /**
+     * 
+     * @param arr 
+     */
+    public void setArr(double[] arr) {
+        this.arr = arr;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getTriangle() {
+        return triangle;
+    }
+    
+    /**
+     * 
+     * @param triangle 
+     */
+    public void setTriangle(String triangle) {
+        this.triangle = triangle;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    /**
+     * 
+     * @param errorMessage 
+     */
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    private double[] arr;
     private String triangle;
     private boolean isRunning;
     private static final Logger LOGGER = Logger.getLogger(TriangleProgram.class.getName());
@@ -28,8 +76,8 @@ public class TriangleProgram {
     private String errorMessage;
 
     /**
-     *
-     * @throws IOException
+     * 
+     * @throws IOException 
      */
     public TriangleProgram() throws IOException {
         fileHandle = new FileHandler();
@@ -53,9 +101,8 @@ public class TriangleProgram {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Path to the log file, the substring is to remove the first / in the path.
+        //Path to the log file
         String path = TriangleProgram.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(1);
-        //This substring is to get out of the classes folders and into the root dir.
         path = path.substring(0, path.length() - 14);
 
         /*Settinng up a logger, formatter and a filehandler with the given path so it can log errors
@@ -74,22 +121,41 @@ public class TriangleProgram {
     }
 
     /**
-     *
+     * 
      */
     public void inputHandler() {
         Scanner scan = new Scanner(System.in, "UTF-8");
-        arr = new int[3];
+        arr = new double[3];
         while (isRunning) {
+            System.out.println("To enter values to you triangle type 1");
+            System.out.println("To exit the program type 2");
             try {
-                getNumbers(scan);  
+                arr[0] = scan.nextInt();
+                if (arr[0] == 1) {
+                    for (int i = 0; i < arr.length;) {
+                        System.out.println("Please enter a value for your triangle");
+                        arr[i] = scan.nextDouble();
+                        if (arr[i] < 0) {
+                            System.out.println("!Invalid value please type a positive number");
+                        } else {
+                            i++;
+                        }
+                    }
+                    calcTriangle();
+                } else if (arr[0] == 2) {
+                    System.out.println("Closing the program, goodbye");
+                    isRunning = false;
+                } else if (arr[0] > 2 || arr[0] < 0) {
+                    System.out.println("!Invalid value please try again");
+                }
             } catch (InputMismatchException ex) {
-                errorMessage = "!Invalid error detected. You got a " + ex;
-                System.out.println(errorMessage);
+                errorMessage = "!Invalid error detected. You got a ";
+                System.out.println(errorMessage + ex);
                 LOGGER.log(Level.INFO, "{0}{1}", new Object[]{errorMessage, ex});
                 System.out.println("Please try again");
-                scan.next();
+                scan = new Scanner(System.in, "UTF-8");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException exc) {
                     LOGGER.log(Level.INFO, "{0}{1}", new Object[]{errorMessage, exc});
                 }
@@ -105,78 +171,7 @@ public class TriangleProgram {
         } else {
             triangle = "scalene triangle";
         }
-        System.out.println("--> Your triangle is: " + triangle + " with the sides; " + arr[0] + ", " + arr[1] + ", " + arr[2]);
+        System.out.println("--> Your triangle is: " + triangle + " with the sides; " + arr[0] + ", " + arr[1]+ ", " + arr[2]);
         arr[0] = 0;
-    }
-    
-    public void getNumbers(Scanner scan){
-        System.out.println("To enter values to you triangle type 1");
-        System.out.println("To exit the program type 2");
-        arr[0] = scan.nextInt();
-                if (arr[0] == 1) {
-                    for (int i = 0; i < arr.length;) {
-                        System.out.println("Please enter a value for your triangle");
-                        arr[i] = scan.nextInt();
-                        if (arr[i] < 0) {
-                            System.out.println("!Invalid value please type a positive number");
-                        } else {
-                            i++;
-                        }
-                    }
-                    calcTriangle();
-                } else if (arr[0] == 2) {
-                    System.out.println("Closing the program, goodbye");
-                    isRunning = false;
-                } else if (arr[0] > 2 || arr[0] < 0) {
-                    System.out.println("!Invalid value please try again");
-                }
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int[] getArr() {
-        return arr;
-    }
-
-    /**
-     *
-     * @param arr
-     */
-    public void setArr(int[] arr) {
-        this.arr = arr;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getTriangle() {
-        return triangle;
-    }
-
-    /**
-     *
-     * @param triangle
-     */
-    public void setTriangle(String triangle) {
-        this.triangle = triangle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    /**
-     *
-     * @param errorMessage
-     */
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 }

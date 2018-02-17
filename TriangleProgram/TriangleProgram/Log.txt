@@ -1,2 +1,0 @@
-feb. 17, 2018 3:58:16 PM triangleprogram.TriangleProgram inputHandler
-INFO: !Invalid error detected. You got a java.util.InputMismatchException
